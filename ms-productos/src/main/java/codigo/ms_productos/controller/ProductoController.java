@@ -18,21 +18,25 @@ public class ProductoController {
     private final ProductoService productoService;
 
     @PostMapping
-    public ResponseEntity<Producto> createProduct(@RequestBody Producto producto){
-        return  ResponseEntity.ok(productoService.createProduct(producto));
+    public ResponseEntity<Producto> createProduct(@RequestHeader("Authorization") String token, @RequestBody Producto producto){
+        return  ResponseEntity.ok(productoService.createProduct(token,producto));
     }
     @GetMapping
-    public ResponseEntity<List<Producto>> ListProduct(){
-        return ResponseEntity.ok(productoService.listProducto());
+    public ResponseEntity<List<Producto>> ListProduct(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(productoService.listProducto(token));
+    }
+    @GetMapping("/{id}")
+    public  ResponseEntity<Boolean> getProductoById(@PathVariable Long id){
+        return ResponseEntity.ok(productoService.getProductoById(id));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> updateProduct(@PathVariable Long id, @RequestBody Producto producto){
-        return ResponseEntity.ok(productoService.updateProducto(id,producto));
+    public ResponseEntity<Producto> updateProduct(@RequestHeader("Authorization") String token,@PathVariable Long id, @RequestBody Producto producto){
+        return ResponseEntity.ok(productoService.updateProducto(token,id,producto));
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable Long id){
+    public ResponseEntity<Map<String, String>> deleteProduct(@RequestHeader("Authorization") String token,@PathVariable Long id){
         Map<String, String> response = new HashMap<>();
-        boolean valid= productoService.deleteProducto(id);
+        boolean valid= productoService.deleteProducto(token,id);
         if(valid){
             response.put("mensaje", "Producto eliminado correctamente");
             return ResponseEntity.ok(response);

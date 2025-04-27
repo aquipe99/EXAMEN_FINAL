@@ -14,12 +14,12 @@ import java.util.List;
 public class OrdenController {
     private final OrdenService ordenService;
     @PostMapping
-    public ResponseEntity<Orden> createOrden(@RequestBody Orden orden){
-        Orden nuevaOrden=ordenService.createOrden(orden);
+    public ResponseEntity<Orden> createOrden(@RequestHeader("Authorization") String token,@RequestBody Orden orden){
+        Orden nuevaOrden=ordenService.createOrden(token,orden);
         return ResponseEntity.ok(nuevaOrden);
     }
-    @GetMapping ResponseEntity<List<Orden>> ListOrden(){
-        List<Orden> ordenes= ordenService.ListOrden();
+    @GetMapping ResponseEntity<List<Orden>> ListOrden(@RequestHeader("Authorization") String token){
+        List<Orden> ordenes= ordenService.ListOrden(token);
         return ResponseEntity.ok(ordenes);
     }
 

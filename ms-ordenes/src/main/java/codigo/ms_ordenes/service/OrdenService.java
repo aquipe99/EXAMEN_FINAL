@@ -5,6 +5,6 @@ import codigo.ms_ordenes.entity.Orden;
 import java.util.List;
 
 public interface OrdenService {
-    Orden createOrden (Orden orden);
-    List<Orden> ListOrden();
+    Orden createOrden (String token,Orden orden);
+    List<Orden> ListOrden(String token);
 }
