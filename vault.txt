@@ -1,0 +1,12 @@
+Ejecutar el comando en CMD
+
+vault server -dev -dev-root-token-id="00000000-0000-0000-0000-000000000000"
+
+en el navegador ir ala ruta  http://localhost:8200/ui/vault/auth?with=token 
+pedirá contraseña colocar  : 00000000-0000-0000-0000-000000000000
+
+en la opción SECRET se realizan las configuraciones
+se pone el nombre del microservicio Ejm : ms-aut, ms-producto,ms-ordenes
+y se guardaron los secretos de l base de datos 
+asi como la key asignatura
+
