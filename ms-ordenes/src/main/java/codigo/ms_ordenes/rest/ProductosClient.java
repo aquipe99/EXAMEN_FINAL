@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "ms-productos")
+@FeignClient(name = "ms-productos",url = "${urls.productos}")
 public interface ProductosClient {
     @GetMapping("/productos/{id}")
     ResponseEntity<Boolean> getProductoById(@PathVariable("id") Long id);
